@@ -1,0 +1,200 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #001520;
+    margin: 0;
+    padding: 20px;
+    color: #e0f2fe;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #76ff03;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card {
+    background: #00293c;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,150,136,0.2);
+    border: 1px solid rgba(118, 255, 3, 0.2);
+}
+
+h2 {
+    color: #76ff03;
+    margin-top: 0;
+    font-size: 1.4em;
+    border-bottom: 2px solid rgba(118, 255, 3, 0.3);
+    padding-bottom: 8px;
+}
+
+input, button, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input {
+    background: rgba(224, 242, 254, 0.08);
+    border: 1px solid rgba(118, 255, 3, 0.3);
+    color: #e0f2fe;
+}
+
+input:focus {
+    border-color: #76ff03;
+    outline: none;
+    box-shadow: 0 0 8px rgba(118, 255, 3, 0.2);
+}
+
+button {
+    background-color: #76ff03;
+    color: #001520;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background-color: #64dd17;
+    transform: translateY(-1px);
+}
+
+#feedback {
+    margin-top: 15px;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 2px solid transparent;
+}
+
+.warning {
+    background-color: #ff5252;
+    border-color: #ff1744;
+    color: #fff;
+}
+
+.success {
+    background-color: #00e676;
+    border-color: #00c853;
+    color: #001520;
+}
+
+#expenseList {
+    list-style: none;
+    padding: 0;
+}
+
+#expenseList li {
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(224, 242, 254, 0.05);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    border-left: 4px solid #76ff03;
+}
+
+#currentLimit,
+#totalSpent,
+#remaining {
+    font-weight: 600;
+    color: #76ff03;
+    font-size: 1.2em;
+}
+.info-alert {
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(118, 255, 3, 0.3);
+    color: #76ff03;
+    font-size: 0.9em;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.info-alert::before {
+    content: '⏳';
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+#limitEndInfo {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(118, 255, 3, 0.1);
+    border: 1px solid rgba(118, 255, 3, 0.3);
+}
+.check-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.check-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.check-details {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+    border-left: 2px solid #76ff03;
+}
+
+.check-details li {
+    padding: 5px 0;
+    font-size: 0.9em;
+    color: rgba(224, 242, 254, 0.8);
+}
+
+.check-header small {
+    font-size: 0.8em;
+    color: rgba(224, 242, 254, 0.6);
+}
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ff5252;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    color: #ff1744;
+}
+
+/* Адаптация стилей для новых элементов */
+
+#expenseList li {
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(224, 242, 254, 0.05);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 4px solid #76ff03;
+}
