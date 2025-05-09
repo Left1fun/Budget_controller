@@ -199,8 +199,6 @@ button:hover {
     color: #ff1744;
 }
 
-/* Адаптация стилей для новых элементов */
-
 #expenseList li {
     padding: 12px;
     margin: 8px 0;
