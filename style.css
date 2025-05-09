@@ -11,6 +11,22 @@ body {
     margin: 0 auto;
 }
 
+.start-card {
+    display: flex;  
+    justify-content: space-between; 
+    align-items: baseline;
+    border-bottom: 2px solid rgba(118, 255, 3, 0.3);
+}
+
+.resetAll {
+    background: #ff1744; 
+    padding: 6px 12px;
+    font-size: 14px;
+    margin-left: 15px;
+    width: auto;
+    max-width: none;
+}
+
 h1 {
     color: #76ff03;
     text-align: center;
@@ -32,8 +48,6 @@ h2 {
     color: #76ff03;
     margin-top: 0;
     font-size: 1.4em;
-    border-bottom: 2px solid rgba(118, 255, 3, 0.3);
-    padding-bottom: 8px;
 }
 
 input, button, select {
@@ -129,7 +143,6 @@ button:hover {
 }
 
 .info-alert::before {
-    content: '⏳';
     margin-right: 8px;
     font-size: 1.2em;
 }
