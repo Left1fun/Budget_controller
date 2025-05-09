@@ -19,7 +19,6 @@
             <p id="limitPeriodLabel">Лимит: <span id="currentLimit">0</span> ₽</p>
             <p>Потрачено: <span id="totalSpent">0</span> ₽</p>
             <p>Осталось: <span id="remaining">0</span> ₽</p>
-            <div id="feedback"></div>
             <div id="forecastInfo">
                 <div id="limitEndInfo" class="info-alert" style="display: none"></div>
                 <div id="nextIncomeInfo" class="info-alert" style="display: none; margin-top: 10px"></div>
@@ -33,6 +32,7 @@
                 <option value="week">Неделя</option>
                 <option value="month">Месяц</option>
                 <option value="year">Год</option>
+                <option value="forever">Вечный</option>
             </select>
             <input type="number" id="monthlyLimit" placeholder="Введите сумму">
             <button onclick="setLimit()">Сохранить лимит</button>
@@ -240,6 +240,8 @@ function saveData() {
 }
 
 function checkLimitReset() {
+    if (limitSettings.period === 'forever') return; // Не сбрасываем вечный лимит
+
     const now = Date.now();
     const lastReset = limitSettings.lastReset;
     const period = limitSettings.period;
@@ -308,7 +310,12 @@ function calculateTimeLeft(targetDate) {
 function setLimit() {
     monthlyLimit = parseFloat(document.getElementById('monthlyLimit').value);
     limitSettings.period = document.getElementById('limitPeriod').value;
-    limitSettings.lastReset = new Date().getTime();
+    
+    // Для вечного лимита не обновляем lastReset
+    if (limitSettings.period !== 'forever') {
+        limitSettings.lastReset = new Date().getTime();
+    }
+    
     if (!monthlyLimit || isNaN(monthlyLimit)) {
         alert("Введите данные корректно!");
         return;
@@ -366,7 +373,8 @@ function updateUI() {
         day: 'Дневной',
         week: 'Недельный',
         month: 'Месячный',
-        year: 'Годовой'
+        year: 'Годовой',
+        forever: 'Вечный' // Добавляем название для вечного периода
     };
     const limitPeriodElement = document.getElementById('limitPeriodLabel');
     if (limitPeriodElement) {
@@ -487,6 +495,11 @@ function updateForecastInfo() {
     limitEndInfo.style.display = monthlyLimit > 0 ? 'block' : 'none';
     nextIncomeInfo.style.display = regularIncomes.length > 0 ? 'block' : 'none';
     // Лимит не установлен
+
+    if (limitSettings.period === 'forever') {
+        limitEndInfo.innerHTML = '∞ Лимит не ограничен по времени';
+        return;
+    }
     if(monthlyLimit === 0) {
         limitEndInfo.innerHTML = '⚠ Лимит не установлен';
         nextIncomeInfo.innerHTML = '';
@@ -538,10 +551,9 @@ function updateForecastInfo() {
 
 
 function getLimitEndTime() {
-    if(monthlyLimit === 0) return null;
+    if (limitSettings.period === 'forever') return null; // Не рассчитываем для вечного
     
-    // Если нет трат, но лимит установлен
-    if(totalSpent === 0) return null;
+    if(monthlyLimit === 0) return null;
     
     const periodMs = {
         day: 86400000,
