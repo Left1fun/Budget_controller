@@ -10,12 +10,12 @@
 </head>
 <body>
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center">
-            <h1>💰 Бюджетный надзиратель</h1>
-            <button onclick="resetAll()" style="max-width: 150px; margin-left: 20px; background: #ff1744">Обнулить всё</button>
-        </div>
+        <h1>💰 Бюджетный надзиратель</h1>
         <div class="card">
-            <h2>Ваш бюджет</h2>
+            <div class="start-card">
+                <h2>Ваш бюджет</h2>
+                <button class="resetAll" onclick="resetAll()">Обнулиться</button>
+            </div>
             <p id="limitPeriodLabel">Лимит: <span id="currentLimit">0</span> ₽</p>
             <p>Потрачено: <span id="totalSpent">0</span> ₽</p>
             <p>Осталось: <span id="remaining">0</span> ₽</p>
