@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бюджетный надзиратель</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https:
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="avatar.png">
 </head>
@@ -59,7 +59,7 @@
                     <input type="number" placeholder="Сумма" class="item-amount">
                 </div>
             </div>
-            <!-- Добавлена строка с промежуточной суммой -->
+            
             <p style="margin: 10px 0">Промежуточная сумма: <strong><span id="checkTotal">0</span> ₽</strong></p>
             <button onclick="addMoreItems()" style="margin-top: 10px;">Добавить ещё товар</button>
             <button onclick="saveCheck()" style="margin-top: 10px; background: #00c853">Сохранить чек</button>
@@ -91,7 +91,6 @@ let currentCheckItems = [];
 let checkTotal = 0;
 let incomeCheckInterval;
 
-// Новая функция для проверки и применения доходов
 function checkRegularIncomes() {
     const now = Date.now();
     let needsUpdate = false;
@@ -149,7 +148,7 @@ function addIncome() {
     document.getElementById('incomeDescription').value = '';
     document.getElementById('incomeAmount').value = '';
 }
-// Глобальные функции для работы с чеками
+
 function addMoreItems() {
     const checkItems = document.getElementById('checkItems');
     const newItem = document.createElement('div');
@@ -159,7 +158,7 @@ function addMoreItems() {
         <input type="number" placeholder="Сумма" class="item-amount">
     `;
     checkItems.appendChild(newItem);
-    // Добавляем обработчик ввода для нового поля
+    
     newItem.querySelector('.item-amount').addEventListener('input', calculateCheckTotal);
 };
 
@@ -210,7 +209,7 @@ function calculateCheckTotal() {
     });
     document.getElementById('checkTotal').textContent = total.toFixed(2);
 }
-// Основные функции приложения
+
 function loadData() {
     const savedData = localStorage.getItem('budgetData');
     if (savedData) {
@@ -240,7 +239,7 @@ function saveData() {
 }
 
 function checkLimitReset() {
-    if (limitSettings.period === 'forever') return; // Не сбрасываем вечный лимит
+    if (limitSettings.period === 'forever') return; 
 
     const now = Date.now();
     const lastReset = limitSettings.lastReset;
@@ -311,7 +310,7 @@ function setLimit() {
     monthlyLimit = parseFloat(document.getElementById('monthlyLimit').value);
     limitSettings.period = document.getElementById('limitPeriod').value;
     
-    // Для вечного лимита не обновляем lastReset
+    
     if (limitSettings.period !== 'forever') {
         limitSettings.lastReset = new Date().getTime();
     }
@@ -374,7 +373,7 @@ function updateUI() {
         week: 'Недельный',
         month: 'Месячный',
         year: 'Годовой',
-        forever: 'Вечный' // Добавляем название для вечного периода
+        forever: 'Вечный' 
     };
     const limitPeriodElement = document.getElementById('limitPeriodLabel');
     if (limitPeriodElement) {
@@ -446,11 +445,10 @@ function deleteEntry(index) {
 function calculateLimitEndDate() {
     if (monthlyLimit === 0 || totalSpent >= monthlyLimit) return null;
     
-    // Рассчитываем средний дневной расход относительно периода
     const periodMilliseconds = {
         day: 86400000,
         week: 604800000,
-        month: 2592000000, // 30 дней
+        month: 2592000000, 
         year: 31536000000
     }[limitSettings.period];
     const timeSinceReset = Date.now() - limitSettings.lastReset;
@@ -494,7 +492,7 @@ function updateForecastInfo() {
     
     limitEndInfo.style.display = monthlyLimit > 0 ? 'block' : 'none';
     nextIncomeInfo.style.display = regularIncomes.length > 0 ? 'block' : 'none';
-    // Лимит не установлен
+    
 
     if (limitSettings.period === 'forever') {
         limitEndInfo.innerHTML = '∞ Лимит не ограничен по времени';
@@ -505,13 +503,13 @@ function updateForecastInfo() {
         nextIncomeInfo.innerHTML = '';
         return;
     }
-    // Лимит исчерпан
+    
     if(totalSpent >= monthlyLimit) {
         limitEndInfo.innerHTML = '⚠ Лимит исчерпан!';
         nextIncomeInfo.innerHTML = '';
         return;
     }
-    // Расчет следующего пополнения
+    
     const nextIncome = getNextIncome();
     if(nextIncome) {
         const timeLeft = calculateTimeLeft(nextIncome.date);
@@ -530,7 +528,7 @@ function updateForecastInfo() {
             ? 'ℹ Рассчет времени обновления...' 
             : 'ℹ Нет активных регулярных пополнений';
     }
-    // Расчет остатка лимита
+    
     const endDate = getLimitEndTime();
     if(endDate) {
         const timeLeft = calculateTimeLeft(endDate);
@@ -551,7 +549,7 @@ function updateForecastInfo() {
 
 
 function getLimitEndTime() {
-    if (limitSettings.period === 'forever') return null; // Не рассчитываем для вечного
+    if (limitSettings.period === 'forever') return null; 
     
     if(monthlyLimit === 0) return null;
     
@@ -565,7 +563,7 @@ function getLimitEndTime() {
     const timePassed = Date.now() - limitSettings.lastReset;
     const spentPerMs = totalSpent / timePassed;
     
-    // Защита от деления на ноль
+    
     if(spentPerMs <= 0) return null;
     
     const remaining = monthlyLimit - totalSpent;
